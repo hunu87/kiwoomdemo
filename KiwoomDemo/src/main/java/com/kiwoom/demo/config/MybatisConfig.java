@@ -24,7 +24,7 @@ public class MybatisConfig {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		
 		sqlSessionFactoryBean.setDataSource(dataSource);
-		sqlSessionFactoryBean.setTypeAliasesPackage("com.kiwoom.demo.mapper");
+		sqlSessionFactoryBean.setTypeAliasesPackage("com.kiwoom.demo");
 		sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mybatis/**/*.xml"));
 		
 		return sqlSessionFactoryBean.getObject();

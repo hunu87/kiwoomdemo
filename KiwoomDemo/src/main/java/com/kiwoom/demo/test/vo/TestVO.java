@@ -1,4 +1,4 @@
-package com.kiwoom.demo.vo;
+package com.kiwoom.demo.test.vo;
 
 import lombok.Data;
 
