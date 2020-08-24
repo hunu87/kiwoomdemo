@@ -11,9 +11,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan(basePackages = "com.kiwoom.demo"
-,sqlSessionFactoryRef = "sqlSessionFactory"
-,sqlSessionTemplateRef = "sqlSession")
+@MapperScan(
+		basePackages = "com.kiwoom.demo.test",
+		sqlSessionFactoryRef = "sqlSessionFactory",
+		sqlSessionTemplateRef = "sqlSession")
+
 public class MybatisConfig {
 	
 	@Autowired
@@ -24,7 +26,7 @@ public class MybatisConfig {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		
 		sqlSessionFactoryBean.setDataSource(dataSource);
-		sqlSessionFactoryBean.setTypeAliasesPackage("com.kiwoom.demo");
+		sqlSessionFactoryBean.setTypeAliasesPackage("com.kiwoom.demo.test");
 		sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mybatis/**/*.xml"));
 		
 		return sqlSessionFactoryBean.getObject();
