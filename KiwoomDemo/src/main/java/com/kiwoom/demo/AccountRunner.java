@@ -16,7 +16,9 @@ public class AccountRunner implements ApplicationRunner{
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
+		/*
 		Account account = accountService.createAccount("hunu87", "kw5000");
 		System.out.println(account.getUsername() + "passoword: " + account.getPassword());
+		*/
 	}
 }

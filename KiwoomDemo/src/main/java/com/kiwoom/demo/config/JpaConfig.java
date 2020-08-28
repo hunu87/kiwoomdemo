@@ -57,6 +57,10 @@ public class JpaConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder) {
 	
 		Map<String, String> propertiesHashMap = new HashMap<>();
+		propertiesHashMap.put("hibernate.hbm2ddl.auto", "validate");
+		propertiesHashMap.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+		propertiesHashMap.put("hibernate.show_sql", "true");
+		propertiesHashMap.put("hibernate.format_sql", "true");
 	  	propertiesHashMap.put("hibernate.physical_naming_strategy", DEFAULT_NAMING_STRATEGY);
 
 	  	LocalContainerEntityManagerFactoryBean rep = builder.dataSource(defaultDataSource())
