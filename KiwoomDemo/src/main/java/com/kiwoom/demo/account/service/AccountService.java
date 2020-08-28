@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kiwoom.demo.account.repository.AccountRepository;
@@ -22,10 +23,16 @@ public class AccountService implements UserDetailsService {
 	@Autowired
 	private AccountRepository accoutRepository;
 	
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
 	public Account createAccount(String username, String password) {
 		Account account = new Account();
 		account.setUsername(username);
-		account.setPassword(password);
+		
+		String encodePassword = passwordEncoder.encode(password);
+		account.setPassword(encodePassword);
+		
 		return accoutRepository.save(account);
 	}
 	

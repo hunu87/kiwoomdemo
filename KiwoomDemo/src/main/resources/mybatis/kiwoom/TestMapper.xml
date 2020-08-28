@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kiwoom.demo.test.mapper.TestMapper">
 	<select id="selectTest" resultType="com.kiwoom.demo.test.vo.TestVO">
-		SELECT 'LEE' AS NAME, 'HUNU87' AS ID
+		SELECT ID, USERNAME
+			FROM ACCOUNT
 	</select>
 </mapper>
