@@ -1,7 +1,9 @@
 package com.kiwoom.demo.account.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kiwoom.demo.account.repository.AccountRepository;
+import com.kiwoom.demo.account.repository.AuthoritiesRepository;
 import com.kiwoom.demo.account.vo.Account;
+import com.kiwoom.demo.account.vo.Authority;
+import com.kiwoom.demo.account.vo.SecurityUser;
 
 @Service
 public class AccountService implements UserDetailsService {
@@ -24,14 +29,18 @@ public class AccountService implements UserDetailsService {
 	private AccountRepository accoutRepository;
 	
 	@Autowired
+    private AuthoritiesRepository authoritiesRepository;
+	
+	@Autowired
 	PasswordEncoder passwordEncoder;
 	
-	public Account createAccount(String username, String password) {
+	public Account createAccount(String username, String password, boolean enabled) {
 		Account account = new Account();
-		account.setUsername(username);
 		
+		account.setUsername(username);
 		String encodePassword = passwordEncoder.encode(password);
 		account.setPassword(encodePassword);
+		account.setEnabled(enabled);
 		
 		return accoutRepository.save(account);
 	}
@@ -41,12 +50,29 @@ public class AccountService implements UserDetailsService {
 		Optional<Account> byUsername = accoutRepository.findByUsername(username);
 		Account account = byUsername.orElseThrow(() -> new UsernameNotFoundException(username));
 		
-		return new User(account.getUsername(), account.getPassword(), authorities());
+		SecurityUser securityUser = new SecurityUser();
+		
+		securityUser.setUsername(account.getUsername());
+		securityUser.setPassword(account.getPassword());
+		securityUser.setAuthorities(getAuthorities(username));
+		securityUser.setEnabled(true);
+		securityUser.setAccountNonExpired(true);
+		securityUser.setAccountNonLocked(true);
+		securityUser.setCredentialsNonExpired(true);
+		
+		System.out.println(securityUser);
+		
+        return securityUser;
 	}
 
-	private Collection<? extends GrantedAuthority> authorities() {
-		return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+	private Collection<? extends GrantedAuthority> getAuthorities(String username) {
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		
+		List<Authority> authList = authoritiesRepository.findByUsername(username);
+        for (Authority authority : authList) {
+            authorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
+        }
+        
+        return authorities;
 	}
-
-
 }
