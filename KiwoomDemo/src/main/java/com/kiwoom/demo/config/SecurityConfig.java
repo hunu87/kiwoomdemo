@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import com.kiwoom.demo.account.controller.AccountDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -23,6 +24,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.formLogin()
 				.and()
 				.httpBasic();
+		
+		/* access denied handler */
+		http.exceptionHandling()
+			.accessDeniedHandler(new AccountDeniedHandler());
 	}
 	
 	@Bean
