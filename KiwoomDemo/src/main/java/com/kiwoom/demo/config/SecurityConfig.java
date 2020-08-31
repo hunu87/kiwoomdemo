@@ -3,6 +3,7 @@ package com.kiwoom.demo.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,18 +13,33 @@ import com.kiwoom.demo.account.controller.AccountDeniedHandler;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+	
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/resources/**", "/css/**", "/fonts/**", "/js/**", "/less/**", "/scss/**", "/images/**", "/img/**", "/webjars/**"); 
+	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				// .antMatchers("").permitAll()
+				.antMatchers("/loginPage").permitAll()
 				.antMatchers("/test").hasRole("USER")
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
+				.loginPage("/loginPage")
 				.and()
 				.httpBasic();
+		
+		/* logout setting */
+		http
+			.logout()
+	        // .logoutUrl("")
+	        // .logoutSuccessUrl("")
+	        // .logoutSuccessHandler(customLogoutSuccessHandler)
+	        .invalidateHttpSession(true);
+	        // .deleteCookies(JSESSIONID)
 		
 		/* access denied handler */
 		http.exceptionHandling()
