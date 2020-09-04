@@ -16,21 +16,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/resources/**", "/css/**", "/fonts/**", "/js/**", "/less/**", "/scss/**", "/images/**", "/img/**", "/webjars/**"); 
+		web.ignoring().antMatchers("/resources/**", "/css/**", "/fonts/**", "/js/**", "/less/**", "/scss/**", "/vendor/**", "/images/**", "/img/**", "/webjars/**"); 
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/loginPage").permitAll()
+				.antMatchers("/login").permitAll()
 				.antMatchers("/test").hasRole("USER")
-				.anyRequest().authenticated()
-				.and()
+				.anyRequest().authenticated();
+		http
 			.formLogin()
-				.loginPage("/loginPage")
-				.and()
-				.httpBasic();
+				.loginPage("/login").permitAll();
+		http	
+			.httpBasic();
 		
 		/* logout setting */
 		http
