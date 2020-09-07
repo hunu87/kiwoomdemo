@@ -6,8 +6,10 @@ import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 @Configuration
+@EnableEncryptableProperties
 public class JasyptStringEncryptor {
 	@Bean("jasyptStringEncrypt")
     public StringEncryptor stringEncryptor() {
