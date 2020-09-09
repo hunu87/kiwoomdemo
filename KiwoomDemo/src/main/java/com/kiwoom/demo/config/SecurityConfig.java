@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.kiwoom.demo.account.controller.AccountDeniedHandler;
+import com.kiwoom.demo.security.CustomAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -28,7 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated();
 		http
 			.formLogin()
-				.loginPage("/login").permitAll();
+				.loginPage("/login").permitAll()
+				.successHandler(new CustomAuthenticationSuccessHandler());
 		http	
 			.httpBasic();
 		

@@ -60,8 +60,6 @@ public class AccountService implements UserDetailsService {
 		securityUser.setAccountNonLocked(true);
 		securityUser.setCredentialsNonExpired(true);
 		
-		System.out.println(securityUser);
-		
         return securityUser;
 	}
 
