@@ -21,6 +21,6 @@ public class TestController {
 		List<TestVO> testList = testService.selectTest(); 
 		model.addAttribute("list", testList);
 		
-		return "test";
+		return "/test/test";
 	}
 }

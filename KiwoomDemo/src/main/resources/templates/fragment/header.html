@@ -1,0 +1,9 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <!--headerFragment 선언-->
+    <div th:fragment="headerFragment">
+    	<form th:action="@{/logout}" method="post">
+        	<h1>HEADER</h1>
+        	<button type="submit">Logout</button> 
+        </form>	
+    </div>
+</html>
