@@ -35,13 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.httpBasic();
 		
 		/* logout setting */
+		/* logout은 post 호출 시에만 작동 함!! */
 		http
 			.logout()
-	        // .logoutUrl("")
-	        // .logoutSuccessUrl("")
-	        // .logoutSuccessHandler(customLogoutSuccessHandler)
-	        .invalidateHttpSession(true);
-	        // .deleteCookies(JSESSIONID)
+	        	.logoutSuccessUrl("/login")
+	        	.invalidateHttpSession(true);
 		
 		/* access denied handler */
 		http.exceptionHandling()

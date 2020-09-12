@@ -5,11 +5,14 @@
 <title>test</title>
 </head>
 <body>
-<table>
-	<tr th:each="list : ${list}">
-		<td th:text="${list.id}"></td>
-		<td th:text="${list.username}"></td>
-	</tr>
-</table>
+<form th:action="@{/logout}" method="post">
+	<button type="submit">Logout</button>
+	<table>
+		<tr th:each="list : ${list}">
+			<td th:text="${list.id}"></td>
+			<td th:text="${list.username}"></td>
+		</tr>
+	</table>
+</form>
 </body>
 </html>
