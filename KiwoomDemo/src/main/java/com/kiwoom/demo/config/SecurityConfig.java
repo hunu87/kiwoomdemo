@@ -34,6 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http	
 			.httpBasic();
 		
+		/* csrf 기본설정은 enable */
+		// http.csrf().disable();
+		
 		/* logout setting */
 		/* logout은 post 호출 시에만 작동 함!! */
 		http

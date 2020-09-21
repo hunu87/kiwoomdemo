@@ -19,7 +19,7 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 @ConfigurationProperties
 @EnableJpaRepositories(
-		basePackages="com.kiwoom.demo.account.repository",  //repository를 관리할 패키지 명시
+		basePackages={"com.kiwoom.demo.account.repository", "com.kiwoom.demo.test.repository"},  //repository를 관리할 패키지 명시
 	    entityManagerFactoryRef = "entityManagerFactory", //EntityManagerFactory
 	    transactionManagerRef = "transactionManager") // transactionManager
 
@@ -64,7 +64,7 @@ public class JpaConfig {
 	  	propertiesHashMap.put("hibernate.physical_naming_strategy", DEFAULT_NAMING_STRATEGY);
 
 	  	LocalContainerEntityManagerFactoryBean rep = builder.dataSource(defaultDataSource())
-	  			.packages("com.kiwoom.demo.account.vo") //domain을 관리할 패키지 경로 명시 (domain = VO 파일)
+	  			.packages("com.kiwoom.demo.account.vo", "com.kiwoom.demo.test.entity") //domain을 관리할 패키지 경로 명시 (domain = VO 파일)
 	  			.properties(propertiesHashMap)
 	  			.build();
 	 
