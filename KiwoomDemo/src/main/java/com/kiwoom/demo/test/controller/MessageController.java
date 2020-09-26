@@ -24,7 +24,7 @@ public class MessageController {
 	 * @param message
 	 * @return
 	 */
-	@PostMapping("/message")
+	@PostMapping("/test/message")
 	public MessageEntity postMessage(MessageDto message) {
 		log.debug("message post request : {}", message);
 
@@ -35,7 +35,7 @@ public class MessageController {
 	 * DB에 저장된 Message 리스트를 리턴
 	 * @return
 	 */
-	@GetMapping("/message")
+	@GetMapping("/test/message")
 	public List<MessageEntity> getMessageList() {
 		return messageRepository.findAll();
 	}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default_layout">
+
+    <div layout:fragment="content">
+    	
+    	<h1>======= th:text, th:utext =======</h1>
+		    
+        <h2 th:text="${message}">Thymeleaf Default Message!!</h2>
+        th:text(html tag 반영하지 않음)) : <div th:text='${"<h3>" + username + "</h3>"}'></div>
+        th:utext(html tag 반영) : <div th:utext='${"<h3>" + username + "</h3>"}'></div>
+        
+        <h1>======= th:each =======</h1>
+        
+        <table border="1" style="width: 100%">
+        	<thead>
+        		<tr>
+        			<td>Index</td>
+			        <td>Size</td>
+			        <td>Id</td>
+			        <td>Name</td>
+		    	</tr>
+        	</thead>
+        	<tbody>
+			    <tr th:each="user, iter : ${userList}">
+			    	<td th:text="${iter.index}"/>
+			    	<td th:text="${iter.size}"/>
+			        <td th:text="${user.id}"/>
+			        <td th:text="${user.username}"/>
+			    </tr>
+		    </tbody>
+    	</table>
+    	
+    	<h1>======= th:with =======</h1>
+    	
+    	<table border="1" style="width: 100%" th:with="target_name='hunu87'">
+		    <tr>
+		        <td>Id</td>
+			    <td>Name</td>
+		    </tr>
+		    <tr th:each="user : ${userList}">
+		    	<td th:text="${user.id}"/>
+		        <td th:text="${user.username == target_name ? user.id: 'not matching id'}"/>
+		    </tr>
+		</table>
+		
+		<h1>======= th:if, th:unless =======</h1>
+		
+		<table border="1" style="width: 100%">
+		    <tr>
+		        <td>Id</td>
+		        <td>Name</td>
+		    </tr>
+		    <tr th:each="user : ${userList}">
+		    	<td th:text="${user.id}"/>
+		        <td th:if="${user.username}">
+		            <a href="/profile" th:if="${user.username=='hunu87'}">hunu87 Profile</a>
+		            <p th:unless="${user.username=='hunu87'}">Nothing</p>
+		        </td>
+		    </tr>
+		</table>
+    </div>
+    
+    <script type="text/javascript" layout:fragment="script">
+    	init();
+		function init() {
+			var message = '[[${message}]]';
+		    alert('init message : ' + message);
+		};
+    </script>
+</html>

@@ -15,7 +15,7 @@ public class TestController {
 	@Autowired 
 	TestService testService;
 	
-	@RequestMapping(value = "/test") 
+	@RequestMapping(value = "/test/mybatis") 
 	public String test(Model model) throws Exception{ 
 		
 		List<TestVO> testList = testService.selectTest(); 
