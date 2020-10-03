@@ -61,6 +61,13 @@
 		        </td>
 		    </tr>
 		</table>
+		
+		<h1>======= application.properties =======</h1>
+		server.port : <span th:text="${@environment.getProperty('server.port')}"></span>
+		
+		<h1>======= message.properties =======</h1>
+		test.msg.title : <span th:text="#{test.msg.title}"></span>
+		
     </div>
     
     <script type="text/javascript" layout:fragment="script">
