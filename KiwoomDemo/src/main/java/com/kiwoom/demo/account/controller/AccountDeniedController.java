@@ -14,6 +14,6 @@ public class AccountDeniedController {
 	@GetMapping("access-denied")
 	public String accessDinied(Principal principal, Model model) {
 		model.addAttribute("name", principal.getName());
-		return "/account/access-denied";
+		return "/account/access-denied"; 
 	}
 }
