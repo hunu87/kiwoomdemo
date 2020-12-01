@@ -83,7 +83,7 @@ public class UrlController {
 			}
 			*/
 			
-			lists.add(item); 
+			lists.add(item);
 		}
 		
 		model.addAttribute("lists", lists);
