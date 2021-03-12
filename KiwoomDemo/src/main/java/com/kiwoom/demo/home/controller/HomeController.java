@@ -14,13 +14,13 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController {
 	
 	@RequestMapping(value = "/home") 
-	public String home(@RequestParam String param, Model model) throws Exception{
+	public String home(@RequestParam(required = false) String param, Model model) throws Exception{
 		log.info("param : " + param);
 		return "/home/home";
 	}
 	
 	@RequestMapping("/home/{no}")
-	public String pathVariableTest(@PathVariable String no) {
+	public String pathVariableTest(@PathVariable(required = false) String no) {
 		return "redirect:/home?param=123";
 	}
 }
